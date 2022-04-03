@@ -23,7 +23,7 @@ function App() {
                 if (author === AUTHORS.me) {
                     setMessages([...messages, {text: 'Received (a) message(s)', author: AUTHORS.bot}])
                 }
-            }, 1000))
+            }, 1500))
         }
     }, [messages])
 
