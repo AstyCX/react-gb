@@ -19,12 +19,13 @@ body {
 
 .App-main {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  min-height: 90vh;
 }
 
 .message {
   margin-bottom: 15px;
-  border: 1px solid #282c34;
+  height: content-box;
 }
 
 .messageText, .messageAuthor {
@@ -38,7 +39,23 @@ body {
   box-sizing: border-box;
   display: flex;
   justify-content: space-around;
-  max-width:1000px;
   width: 100%;
   flex-wrap: wrap;
+
+}
+
+.carryMessages {
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sendMess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messageArea {
+  width: 100%;
 }
