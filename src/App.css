@@ -8,7 +8,7 @@ body {
 
 .App-header {
   background-color: #282c34;
-  min-height: 50px;
+  height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +20,7 @@ body {
 .App-main {
   display: flex;
   justify-content: space-between;
-  min-height: 90vh;
+  min-height: 75vh;
 }
 
 .message {
@@ -41,7 +41,6 @@ body {
   justify-content: space-around;
   width: 100%;
   flex-wrap: wrap;
-
 }
 
 .carryMessages {
@@ -58,4 +57,8 @@ body {
 
 .messageArea {
   width: 100%;
+}
+
+.active {
+  color: #5151c1;
 }

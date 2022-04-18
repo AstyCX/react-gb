@@ -9,7 +9,16 @@ import {ThemeProvider} from "@mui/material";
 const theme = createTheme({
     palette: {
         mode: 'light'
-    }
+    },
+     components: {
+        MuiTab: {
+            styleOverrides: {
+                root: {
+                    color: '#fff'
+                }
+            }
+        }
+     }
 })
 
 ReactDOM.render(
