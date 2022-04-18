@@ -7,7 +7,11 @@ const AddChat = ({chats, setChats}) => {
 
     const handleClick = () => {
         setChats(()=>{
-            const h = chats;
+            const icons = Object.values(chats).map(el=>el.icon)
+            let h = JSON.parse(JSON.stringify(chats));
+            for (let i = 1; i <= Object.keys(h).slice(-1)[0]; i++) {
+                h[i].icon = icons[i-1];
+            }
             h[+(Object.keys(chats).slice(-1)[0])+1] = {
                 title: value,
                 icon: <Person />,
