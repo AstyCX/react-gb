@@ -35,8 +35,13 @@ const Chats = () => {
     }
 
     const handleClick = () => {
+        console.log(JSON.parse(JSON.stringify(chats)))
         setChats(()=>{
-            const h = chats;
+            const icons = Object.values(chats).map(el=>el.icon);
+            let h = JSON.parse(JSON.stringify(chats));
+            for (let i = 1; i <= Object.keys(h).slice(-1)[0]; i++) {
+                h[i].icon = icons[i-1];
+            }
             h[location.id].messages = [...h[location.id].messages, {text: value, author: AUTHORS.me}];
             return h;
         });
@@ -51,7 +56,11 @@ const Chats = () => {
             setTimeoutID(setTimeout(() => {
                 if (author === AUTHORS.me) {
                     setChats(()=>{
-                        const h = chats;
+                        const ic = Object.values(chats).map(el=>el.icon);
+                        let h = JSON.parse(JSON.stringify(chats));
+                        for (let i = 1; i <= Object.keys(h).slice(-1)[0]; i++) {
+                            h[i].icon = ic[i-1];
+                        }
                         h[location.id].messages = [...h[location.id].messages, {text: 'Bot received the message', author: AUTHORS.bot}];
                         return h;
                     })
