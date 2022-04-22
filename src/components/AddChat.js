@@ -15,7 +15,8 @@ const AddChat = ({chats, setChats}) => {
             h[+(Object.keys(chats).slice(-1)[0])+1] = {
                 title: value,
                 icon: <Person />,
-                messages: []
+                messages: [],
+                changed: false
             }
             return h
         })
