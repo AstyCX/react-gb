@@ -19,7 +19,7 @@ const App = () => {
                                 link: '/profile'
                             }, Chats: {
                                 id: 'chats',
-                                link: '/chats/1'
+                                link: '/chats/'
                             }
                         }
                     }/>
