@@ -1,0 +1,76 @@
+body {
+  background: aliceblue;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-main {
+  display: flex;
+  justify-content: space-between;
+  min-height: 75vh;
+}
+
+.message {
+  margin-bottom: 15px;
+  height: content-box;
+}
+
+.messageText, .messageAuthor {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.messages {
+  padding: 10px 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.carryMessages {
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sendMess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messageArea {
+  width: 100%;
+}
+
+.nameArea {
+  width: 100%;
+}
+
+.active {
+  color: #5151c1;
+}
+
+.changeName {
+  padding: 20px;
+  max-height: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
