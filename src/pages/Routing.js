@@ -10,6 +10,7 @@ const Routing = () => {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/chats/:id' element={<Chats/>}/>
             <Route path='/chats/' element={<Chats/>}/>
+
         </Routes>
     )
 }
