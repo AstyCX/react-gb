@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {createTheme} from "@mui/material";
 import {ThemeProvider} from "@mui/material";
 import {Provider} from "react-redux";
-import store from "./store";
+import store from "./store/Duck";
 
 const theme = createTheme({
     palette: {

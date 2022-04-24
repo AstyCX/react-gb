@@ -1,24 +1,30 @@
 import {useDispatch, useSelector} from "react-redux";
-import {changeVisible} from "../store/profile/actions";
-import {Checkbox, FormControlLabel} from "@mui/material";
-import {useCallback} from "react";
+import {changeName} from "../store/Duck/actions";
+import {Button, TextField} from "@mui/material";
+import {useCallback, useRef, useState} from "react";
+import {Send} from "@mui/icons-material";
 
 const Profile = () => {
-    const {checked} = useSelector(store=>store);
+    const name = useSelector(state=>state.profile.name)
     const dispatch = useDispatch();
+    const [value, setValue] = useState('');
+    const inputEl = useRef(null);
 
-    const handleChange = useCallback(() => {
-        dispatch(changeVisible);
-    }, [dispatch]);
+    const handleChange = (e) => {
+        setValue(e.target.value)
+    }
 
-    return <>
-        <h1>Input checked: </h1>
-        {checked && <h1>Checked</h1>}
-        {!checked && <h1>Unchecked</h1>}
-        <FormControlLabel
-            control={<Checkbox onChange={handleChange} size={'big'} />}
-            label="Change value" />
-    </>
+    const handleClick = useCallback(()=>{
+        dispatch(changeName(value))
+        setValue('')
+    }, [dispatch, value])
+
+    return <div className='changeName'>
+        <h1>User name is: {name}</h1>
+        <TextField autoFocus ref={inputEl} id="outlined-basic" label="Your name" variant="outlined"
+                   onChange={handleChange} value={value} className={'nameArea'}/>
+        <Button onClick={handleClick} variant="contained"><Send/></Button>
+    </div>
 }
 
 export default Profile;

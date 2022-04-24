@@ -12,7 +12,8 @@ const NavPages = ({pages}) => {
 
     return (
         <Tabs value={loc} aria-label="nav tabs example">
-            {Object.keys(pages).map((el,i)=>(<Tab value={pages[el].id} key={i} label={el} to={pages[el].link} component={Link}/>))}
+            {Object.keys(pages).map((el,i)=>(
+                <Tab value={pages[el].id} key={i} label={el} to={pages[el].link} component={Link}/>))}
         </Tabs>
     )
 }
