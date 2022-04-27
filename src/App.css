@@ -59,6 +59,18 @@ body {
   width: 100%;
 }
 
+.nameArea {
+  width: 100%;
+}
+
 .active {
   color: #5151c1;
+}
+
+.changeName {
+  padding: 20px;
+  max-height: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
