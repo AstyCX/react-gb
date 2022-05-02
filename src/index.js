@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {createTheme} from "@mui/material";
 import {ThemeProvider} from "@mui/material";
 import {Provider} from "react-redux";
-import store from "./store/Duck";
+import store, {persistor} from "./store/duck";
+import {PersistGate} from 'redux-persist/integration/react'
 
 const theme = createTheme({
     palette: {
@@ -24,14 +25,16 @@ const theme = createTheme({
 })
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-        <ThemeProvider theme={theme}>
-            <App />
-        </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <PersistGate persistor={persistor} loading={null}>
+                <ThemeProvider theme={theme}>
+                    <App/>
+                </ThemeProvider>
+            </PersistGate>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,5 +1,4 @@
 import {ADD_CHAT, DEL_CHAT, ADD_CHAT_MESSAGES, ADD_MESSAGE, CHANGE_NAME, DEL_CHAT_MESSAGES} from "./actions";
-import {Person} from "@mui/icons-material";
 import {AUTHORS} from "../../constants/common";
 
 /**
@@ -28,7 +27,6 @@ const chatsReducer = (state = {
                     ...chatList,
                     {
                         id: chatId,
-                        icon: <Person />,
                         title: action.payload
                     }
                 ]

@@ -1,7 +1,7 @@
 import './App.css';
-import Routing from "./pages/Routing";
+import Routing from "./pages/containers/Routing";
 import {BrowserRouter} from "react-router-dom";
-import NavPages from "./components/NavPages";
+import NavPages from "./components/containers/NavPages";
 
 const App = () => {
     return (
