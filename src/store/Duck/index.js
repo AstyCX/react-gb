@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import * as reducers from './reducers';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from "./sagas";
+import rootSaga from "../../middlewares/sagas";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 

@@ -5,7 +5,13 @@ import {
     ADD_MESSAGE,
     CHANGE_NAME,
     DEL_CHAT_MESSAGES,
-    GET_GISTS_SUCCESS, GET_GISTS_REQUEST, GET_GISTS_FAIL
+    GET_GISTS_SUCCESS,
+    GET_GISTS_REQUEST,
+    GET_GISTS_FAIL,
+    CHANGE_CHAT_LIST,
+    ADD_CHAT_MESSAGES_FB,
+    UPDATE_MESSAGES,
+    CHANGE_MESSAGE_LIST
 } from "./actions";
 import {AUTHORS} from "../../constants/common";
 
@@ -14,8 +20,7 @@ import {AUTHORS} from "../../constants/common";
  *     chatList: [
  *         {
  *             id: string,
- *             icon: React.component,
- *             title: string
+ *             name: string
  *         }
  *     ]
  * }
@@ -35,7 +40,7 @@ const chatsReducer = (state = {
                     ...chatList,
                     {
                         id: chatId,
-                        title: action.payload
+                        name: action.payload
                     }
                 ]
             }
@@ -51,6 +56,11 @@ const chatsReducer = (state = {
                 }
             }
             return a;
+        }
+        case CHANGE_CHAT_LIST: {
+            return {
+               chatList: action.payload
+            }
         }
         default:
             return state;
@@ -75,6 +85,11 @@ const messagesReducer = (state = {
     messageList: {}
 }, action) => {
     switch (action.type) {
+        case CHANGE_MESSAGE_LIST:
+            return {
+                ...state,
+                messageList: action.payload
+            }
         case ADD_MESSAGE: {
             const {id, message} = action.payload;
             const oldMessages = state.messageList[id] || [];
@@ -104,6 +119,11 @@ const messagesReducer = (state = {
                 }
             }
         }
+        case ADD_CHAT_MESSAGES_FB:
+            return {
+                ...state,
+                messageList: action.payload
+            }
         case DEL_CHAT_MESSAGES: {
             const a = {
                 ...state,

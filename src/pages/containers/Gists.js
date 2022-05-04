@@ -32,6 +32,8 @@ const Gists = () => {
                 return <>
                     <Button onClick={handleClick}>Try Again</Button>
                 </>
+            default:
+                return <>Error</>
         }
     }
 

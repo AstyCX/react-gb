@@ -2,6 +2,7 @@ import './App.css';
 import Routing from "./components/containers/Routing";
 import {BrowserRouter} from "react-router-dom";
 import NavPages from "./components/containers/NavPages";
+import {AuthProvider} from "./hooks/AuthProvider";
 
 const App = () => {
     return (
@@ -23,12 +24,20 @@ const App = () => {
                             }, Gists: {
                                 id: 'gists',
                                 link: '/gists'
+                            }, Login: {
+                                id: 'login',
+                                link: '/login'
+                            }, Registration: {
+                                id: 'registration',
+                                link: '/registration'
                             }
                         }
                     }/>
                 </header>
                 <main className='App-main'>
-                    <Routing/>
+                    <AuthProvider >
+                        <Routing />
+                    </AuthProvider>
                 </main>
             </div>
         </BrowserRouter>

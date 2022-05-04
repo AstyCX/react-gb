@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getChatList} from "../../store/Duck/selectors";
 import {useCallback} from "react";
 import {Delete} from "@mui/icons-material";
-import {delChat, delChatMessages} from "../../store/Duck/actions";
+import {changeChatListSaga, delChatFBSaga, delChatMessages} from "../../store/Duck/actions";
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -19,8 +19,8 @@ const ChatList = () => {
     const dispatch = useDispatch();
 
     const handleDelete = useCallback((el)=>{
-        dispatch(delChatMessages(el.id));
-        dispatch(delChat(el.id));
+        dispatch(delChatFBSaga(el.id));
+        dispatch(changeChatListSaga());
     }, [dispatch])
 
     return (
@@ -34,13 +34,13 @@ const ChatList = () => {
                                         <ListItemIcon>
                                             {el.icon}
                                         </ListItemIcon>
-                                        <ListItemText primary={el.title}/>
+                                        <ListItemText primary={el.name}/>
                                     </ListItemButton>
                                 </ListItem>
                             </StyledLink>
                             <Button onClick={()=>{handleDelete(el)}} ><Delete /></Button>
                         </div>
-                ))}
+                    ))}
             </List>
             <AddChat />
         </Paper>
