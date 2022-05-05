@@ -1,15 +1,13 @@
 import Message from "../../components/presentations/Message";
 import ChatList from "../../components/containers/ChatList";
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import ControlPanel from "../../components/presentations/ControlPanel";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addMessageFBSaga, changeChatListSaga} from "../../store/Duck/actions";
-import {getChatList, getMessageList, getProfileName, getState} from "../../store/Duck/selectors";
-import {getMessagesFB} from "../../middlewares/firebaseActions";
+import {getMessageList, getProfileName} from "../../store/Duck/selectors";
 
 const Chats = () => {
-    const state = useSelector(getState);
     const name = useSelector(getProfileName)
     const dispatch = useDispatch();
     const messageList = useSelector(getMessageList)
@@ -22,15 +20,11 @@ const Chats = () => {
     }
 
     const handleClick = () => {
-        // dispatch(addMessageWithSaga(location.id, {text: value, author: name}))
-        dispatch(addMessageFBSaga(id, {text: value, author: name}))
+        dispatch(addMessageFBSaga(id, {text: value, author: name}));
+        dispatch(changeChatListSaga());
         setValue('');
         inputEl.current.focus();
     }
-
-    useEffect(()=>{
-        dispatch(changeChatListSaga());
-    }, [id, messageList[id]])
 
     return (<>
             <ChatList/>
@@ -43,11 +37,9 @@ const Chats = () => {
                 {id && messageList[id] &&
                     <ControlPanel inputEl={inputEl} handleChange={handleChange} handleClick={handleClick}
                                   value={value}/>}
-                {id}
             </div>
         </>
     );
 }
-
 
 export default Chats;

@@ -1,7 +1,6 @@
 import {
     ADD_CHAT_FB_SAGA,
     ADD_MESSAGE_FB_SAGA,
-    ADD_MESSAGE_WITH_SAGA,
     CHANGE_CHAT_LIST_SAGA,
     changeChatList,
     changeMessageList,
@@ -17,20 +16,10 @@ import {fetchData} from "./api";
 import {addChat, removeChat, trackDB, addMessage} from "./firebaseActions";
 
 
-// function* handleMessage(action) {
-//     yield put(addMessage(action.payload.id, action.payload.message));
-//     if (action.payload.message.author !== AUTHORS.bot) {
-//         const message = {text: 'Bot received the message', author: AUTHORS.bot};
-//         yield delay(1500);
-//         yield put(addMessage(action.payload.id, message));
-//     }
-// }
-
 function* requestAPIData(action) {
     yield put(getGistsRequest(action.payload));
     try {
         const data = yield call(()=>fetchData(action.payload));
-        console.log(data)
         yield put(getGistsSuccess(data));
     } catch (e) {
         yield put(getGistsFail(e))
@@ -55,10 +44,12 @@ function* addMessageFB(action) {
     yield call(addMessage, action.payload.id, action.payload.message);
     yield delay(1500);
     yield call(addMessage, action.payload.id, {text: 'Bot received the message', author: AUTHORS.bot});
+    const [chats, msg] = yield call(trackDB);
+    yield put(changeChatList(chats));
+    yield put(changeMessageList(msg));
 }
 
 export default function* rootSaga () {
-    // yield takeLatest(ADD_MESSAGE_WITH_SAGA, handleMessage);
     yield takeEvery(GET_GISTS_REQUEST_SAGA, requestAPIData);
     yield takeEvery(CHANGE_CHAT_LIST_SAGA, initTrackerWithFB);
     yield takeEvery(ADD_CHAT_FB_SAGA, addChatFB);

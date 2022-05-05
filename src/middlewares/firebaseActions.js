@@ -10,6 +10,7 @@ export const trackDB = async () => {
         onValue(chatRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
+                console.log(data)
                 for (let i of Object.keys(data)) {
                     msg[i] = data[i].messageList ? Object.values(data[i].messageList) : [];
                 }

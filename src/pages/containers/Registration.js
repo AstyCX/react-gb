@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Button, TextField} from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {getAuth} from "firebase/auth";
-import firebaseConfig from "../services/firebase-config";
+import firebaseConfig from "../../services/firebase-config";
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import 'react-toastify/dist/ReactToastify.css';
 import {toast, ToastContainer} from "react-toastify";

@@ -1,5 +1,5 @@
-import { useNavigate, useLocation } from 'react-router-dom';
-import useAuth from "../hooks/AuthProvider";
+import {useNavigate} from 'react-router';
+import useAuth from "../../hooks/AuthProvider";
 import {toast, ToastContainer} from "react-toastify";
 import {Button, TextField} from "@mui/material";
 import {useState} from "react";
@@ -7,14 +7,12 @@ import {Person} from "@mui/icons-material";
 
 const Login = () => {
     let navigate = useNavigate();
-    let location = useLocation();
     const auth = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    let from = location.state?.from?.pathname || '/';
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -26,9 +24,11 @@ const Login = () => {
         e.preventDefault();
         try {
             await auth.signin({email, password}, ()=>{
-                setTimeout(()=>{
-                    navigate(from, {replace: true})
-                }, 1000)
+                navigate('/', {replace: true});
+            });
+
+            toast.success('Success', {
+                position: toast.POSITION.TOP_LEFT
             })
         } catch (e) {
             setError(e.message);
@@ -40,7 +40,7 @@ const Login = () => {
     }
 
     return <div className='login'>
-        <ToastContainer />
+        <ToastContainer/>
         <form onSubmit={onSubmit} className={`formLogin ${error ? 'errorFormLogin' : ''}`}>
             <TextField
                 className='logInput'
@@ -63,7 +63,7 @@ const Login = () => {
             <Button
                 className='submitLog'
                 type='submit'
-            >Login <Person /></Button>
+            >Login <Person/></Button>
             {error && <p>{error}</p>}
         </form>
     </div>

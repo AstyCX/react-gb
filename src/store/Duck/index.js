@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {legacy_createStore as createStore, combineReducers, applyMiddleware} from 'redux';
 import * as reducers from './reducers';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "../../middlewares/sagas";
@@ -26,7 +26,5 @@ const store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
 const persistor = persistStore(store);
 
 export {persistor, store}
-
-export default store;
 
 sagaMiddleware.run(rootSaga);

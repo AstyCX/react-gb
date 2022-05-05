@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {createTheme} from "@mui/material";
 import {ThemeProvider} from "@mui/material";
 import {Provider} from "react-redux";
-import store, {persistor} from "./store/Duck";
+import {store, persistor} from "./store/Duck";
 import {PersistGate} from 'redux-persist/integration/react'
 
 const theme= createTheme({

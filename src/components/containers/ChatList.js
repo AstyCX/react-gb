@@ -5,9 +5,10 @@ import '../../App.css';
 import AddChat from './AddChat';
 import {useDispatch, useSelector} from "react-redux";
 import {getChatList} from "../../store/Duck/selectors";
-import {useCallback} from "react";
+import {useCallback, useEffect} from "react";
 import {Delete} from "@mui/icons-material";
-import {changeChatListSaga, delChatFBSaga, delChatMessages} from "../../store/Duck/actions";
+import {changeChatListSaga, delChatFBSaga} from "../../store/Duck/actions";
+import {useParams} from "react-router";
 
 const StyledLink = styled(Link)`
     text-decoration: none;
@@ -17,17 +18,22 @@ const StyledLink = styled(Link)`
 const ChatList = () => {
     const chats = useSelector(getChatList);
     const dispatch = useDispatch();
+    const {id} = useParams();
 
     const handleDelete = useCallback((el)=>{
         dispatch(delChatFBSaga(el.id));
         dispatch(changeChatListSaga());
     }, [dispatch])
 
+    useEffect(()=>{
+        dispatch(changeChatListSaga());
+    }, [id, dispatch])
+
     return (
         <Paper elevation={0}>
             <List>
                 {chats.map((el, i) => (
-                        <div className="chat" key={i}>
+                        <div className="chat" key={el.id}>
                             <StyledLink to={`/chats/${el.id}`}>
                                 <ListItem disablePadding key={i}>
                                     <ListItemButton>
@@ -38,7 +44,9 @@ const ChatList = () => {
                                     </ListItemButton>
                                 </ListItem>
                             </StyledLink>
-                            <Button onClick={()=>{handleDelete(el)}} ><Delete /></Button>
+                            <Link to='/chats'>
+                                <Button onClick={()=>{handleDelete(el)}} ><Delete /></Button>
+                            </Link>
                         </div>
                     ))}
             </List>
