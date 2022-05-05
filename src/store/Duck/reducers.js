@@ -1,5 +1,12 @@
-import {ADD_CHAT, DEL_CHAT, ADD_CHAT_MESSAGES, ADD_MESSAGE, CHANGE_NAME, DEL_CHAT_MESSAGES} from "./actions";
-import {Person} from "@mui/icons-material";
+import {
+    ADD_CHAT,
+    DEL_CHAT,
+    ADD_CHAT_MESSAGES,
+    ADD_MESSAGE,
+    CHANGE_NAME,
+    DEL_CHAT_MESSAGES,
+    GET_GISTS_SUCCESS, GET_GISTS_REQUEST, GET_GISTS_FAIL
+} from "./actions";
 import {AUTHORS} from "../../constants/common";
 
 /**
@@ -28,7 +35,6 @@ const chatsReducer = (state = {
                     ...chatList,
                     {
                         id: chatId,
-                        icon: <Person />,
                         title: action.payload
                     }
                 ]
@@ -135,8 +141,66 @@ const profileReducer = (state = {
     }
 }
 
+export const STATUSES = {
+    IDLE: 0,
+    REQUEST: 1,
+    SUCCESS: 2,
+    FAILURE: 3
+}
+
+/**
+ * initialState = {
+ *     gists: [],
+ *     request: number,
+ *     error: {
+ *         event: boolean,
+ *         description: string
+ *     }
+ * }
+ */
+
+const gistsReducer = (state = {
+    gists: [],
+    request: STATUSES.IDLE,
+    error: {
+        description: '',
+        event: null
+    }
+}, action) => {
+    switch (action.type) {
+        case GET_GISTS_SUCCESS:
+            return {
+                ...state,
+                gists: action.payload,
+                request: STATUSES.SUCCESS,
+                error: {
+                    ...state.error,
+                    event: false
+                }
+            }
+        case GET_GISTS_REQUEST:
+            return {
+                ...state,
+                request: STATUSES.REQUEST
+            }
+        case GET_GISTS_FAIL:
+            return {
+                ...state,
+                request: STATUSES.FAILURE,
+                error: {
+                    ...state.error,
+                    description: action.payload,
+                    event: true
+                }
+            }
+        default:
+            return state;
+    }
+}
+
 export {
     messagesReducer,
     chatsReducer,
-    profileReducer
+    profileReducer,
+    gistsReducer
 }
