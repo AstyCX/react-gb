@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getChatList} from "../../store/Duck/selectors";
 import {useCallback, useEffect} from "react";
 import {Delete} from "@mui/icons-material";
-import {changeChatListSaga, delChatFBSaga} from "../../store/Duck/actions";
+import {updateDBSaga, delChatFBSaga} from "../../store/Duck/actions";
 import {useParams} from "react-router";
 
 const StyledLink = styled(Link)`
@@ -22,11 +22,11 @@ const ChatList = () => {
 
     const handleDelete = useCallback((el)=>{
         dispatch(delChatFBSaga(el.id));
-        dispatch(changeChatListSaga());
+        dispatch(updateDBSaga());
     }, [dispatch])
 
     useEffect(()=>{
-        dispatch(changeChatListSaga());
+        dispatch(updateDBSaga());
     }, [id, dispatch])
 
     return (

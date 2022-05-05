@@ -27,7 +27,7 @@ export const getGistsFail = (error) => ({
 
 //Chats
 export const CHANGE_CHAT_LIST_FB = 'CHATS::CHANGE_CHAT_LIST_FB';
-export const CHANGE_CHAT_LIST_SAGA = 'CHATS::CHANGE_CHAT_LIST_SAGA';
+export const UPDATE_DB_SAGA = 'CHATS::UPDATE_DB_SAGA';
 export const DEL_CHAT_FB_SAGA = 'CHATS::DEL_CHAT_FB_SAGA';
 export const ADD_CHAT_FB_SAGA = 'CHATS::ADD_CHAT_FB_SAGA';
 
@@ -46,16 +46,22 @@ export const changeChatList = (chats) => ({
     payload: chats
 });
 
-export const changeChatListSaga = () => ({
-    type: CHANGE_CHAT_LIST_SAGA
+export const updateDBSaga = () => ({
+    type: UPDATE_DB_SAGA
 });
 
 
 //Profile
-export const CHANGE_NAME = 'PROFILE::CHANGE_NAME';
+export const CHANGE_NAME_FB = 'PROFILE::CHANGE_NAME_FB';
+export const CHANGE_NAME_FB_SAGA = 'PROFILE::CHANGE_NAME_FB_SAGA';
 
-export const changeName = (name) => ({
-    type: CHANGE_NAME,
+export const changeNameFBSaga = (name) => ({
+    type: CHANGE_NAME_FB_SAGA,
+    payload: name
+})
+
+export const changeProfile = (name) => ({
+    type: CHANGE_NAME_FB,
     payload: name
 });
 
@@ -63,6 +69,12 @@ export const changeName = (name) => ({
 //Messages
 export const ADD_MESSAGE_FB_SAGA = 'MESSAGES::ADD_MESSAGE_FB';
 export const CHANGE_MESSAGE_LIST_FB = 'MESSAGES::CHANGE_MESSAGE_LIST_FB';
+export const UPDATE_MESSAGES_NAME_FB_SAGA = 'MESSAGES::UPDATE_MESSAGES_NAME_FB_SAGA';
+
+export const updateMessagesNameFBSaga = (name) => ({
+    type: UPDATE_MESSAGES_NAME_FB_SAGA,
+    payload: name
+})
 
 export const changeMessageList = (msg) => ({
     type: CHANGE_MESSAGE_LIST_FB,

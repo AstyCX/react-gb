@@ -16,7 +16,7 @@ const Gists = () => {
 
     return <>
         {!state.request && <Button onClick={handleClick}>Get Gists</Button>}
-        {!(state.request-1) && <CircularProgress/>}
+        {!(state.request-1) && <div className='loading'><CircularProgress/></div> }
         {!(state.request-2) && <div className='gists'>
             {state.gists.map((el, i)=>(
                 <Paper className='gistsDescription' key={i}>{el.description}</Paper>

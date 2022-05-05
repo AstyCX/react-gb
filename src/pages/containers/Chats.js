@@ -4,8 +4,9 @@ import {useRef, useState} from "react";
 import ControlPanel from "../../components/presentations/ControlPanel";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {addMessageFBSaga, changeChatListSaga} from "../../store/Duck/actions";
+import {addMessageFBSaga, updateDBSaga} from "../../store/Duck/actions";
 import {getMessageList, getProfileName} from "../../store/Duck/selectors";
+import {AUTHORS} from "../../constants/common";
 
 const Chats = () => {
     const name = useSelector(getProfileName)
@@ -21,7 +22,7 @@ const Chats = () => {
 
     const handleClick = () => {
         dispatch(addMessageFBSaga(id, {text: value, author: name}));
-        dispatch(changeChatListSaga());
+        dispatch(updateDBSaga());
         setValue('');
         inputEl.current.focus();
     }
@@ -31,7 +32,7 @@ const Chats = () => {
             <div className="carryMessages">
                 <div className='messages'>
                     {id && messageList[id] ? messageList[id].map((el, i) => (
-                        <Message key={i} props={el}/>
+                        <Message key={i} props={{text: el.text, author: el.author === AUTHORS.me ? name : AUTHORS.bot}}/>
                     )) : <h1>Select or create a chat</h1>}
                 </div>
                 {id && messageList[id] &&

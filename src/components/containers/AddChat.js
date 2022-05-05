@@ -1,7 +1,7 @@
 import {Button, TextField} from "@mui/material";
 import {useCallback, useState} from "react";
 import {useDispatch} from "react-redux";
-import {addChatFBSaga, changeChatListSaga} from "../../store/Duck/actions";
+import {addChatFBSaga, updateDBSaga} from "../../store/Duck/actions";
 
 const AddChat = () => {
     const [value, setValue] = useState('');
@@ -9,7 +9,7 @@ const AddChat = () => {
 
     const handleClick = useCallback(()=>{
         dispatch(addChatFBSaga(value));
-        dispatch(changeChatListSaga());
+        dispatch(updateDBSaga());
         setValue('')
     }, [dispatch, value])
 

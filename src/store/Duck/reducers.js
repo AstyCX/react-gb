@@ -1,10 +1,10 @@
 import {
-    CHANGE_NAME,
     GET_GISTS_SUCCESS,
     GET_GISTS_REQUEST,
     GET_GISTS_FAIL,
     CHANGE_CHAT_LIST_FB,
-    CHANGE_MESSAGE_LIST_FB
+    CHANGE_MESSAGE_LIST_FB,
+    CHANGE_NAME_FB
 } from "./actions";
 import {AUTHORS} from "../../constants/common";
 
@@ -63,7 +63,7 @@ const messagesReducer = (state = {
 
 /**
  * initialState = {
- *     checked: boolean
+ *     name: string
  * }
  */
 
@@ -71,7 +71,7 @@ const profileReducer = (state = {
     name: AUTHORS.me
 }, action) => {
     switch (action.type) {
-        case CHANGE_NAME:
+        case CHANGE_NAME_FB:
             return {
                 ...state,
                 name: action.payload

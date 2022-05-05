@@ -8,7 +8,7 @@ import Login from "../../pages/containers/Login";
 import RequireAuth from "../../hocs/RequireAuth";
 import {useLocation} from "react-router-dom";
 import {useEffect} from "react";
-import {changeChatListSaga} from "../../store/Duck/actions";
+import {updateDBSaga} from "../../store/Duck/actions";
 import {useDispatch} from "react-redux";
 
 const Routing = () => {
@@ -16,7 +16,7 @@ const Routing = () => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(changeChatListSaga())
+        dispatch(updateDBSaga())
     }, [location.pathname, dispatch])
 
     return (
