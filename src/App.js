@@ -1,5 +1,5 @@
 import './App.css';
-import Routing from "./pages/containers/Routing";
+import Routing from "./components/containers/Routing";
 import {BrowserRouter} from "react-router-dom";
 import NavPages from "./components/containers/NavPages";
 
@@ -19,7 +19,10 @@ const App = () => {
                                 link: '/profile'
                             }, Chats: {
                                 id: 'chats',
-                                link: '/chats/'
+                                link: '/chats'
+                            }, Gists: {
+                                id: 'gists',
+                                link: '/gists'
                             }
                         }
                     }/>

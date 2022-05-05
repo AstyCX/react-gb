@@ -74,3 +74,13 @@ body {
   align-items: center;
   width: 100%;
 }
+
+.gists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.gistsDescription {
+  margin: 0 0 15px 0;
+}

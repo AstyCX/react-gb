@@ -1,6 +1,14 @@
-import {ADD_MESSAGE_WITH_SAGA, addMessage} from "./actions";
-import {put, delay, takeLatest} from 'redux-saga/effects'
+import {
+    ADD_MESSAGE_WITH_SAGA,
+    addMessage,
+    GET_GISTS_REQUEST_SAGA, getGistsFail,
+    getGistsRequest,
+    getGistsSuccess
+} from "./actions";
+import {put, delay, takeEvery, takeLatest, call} from 'redux-saga/effects'
 import {AUTHORS} from "../../constants/common";
+import {fetchData} from "./api";
+
 
 function* handleMessage(action) {
     yield put(addMessage(action.payload.id, action.payload.message));
@@ -11,8 +19,20 @@ function* handleMessage(action) {
     }
 }
 
-function* mySaga () {
-    yield takeLatest(ADD_MESSAGE_WITH_SAGA, handleMessage);
+function* requestAPIData(action) {
+    console.log(action)
+    yield put(getGistsRequest(action.payload));
+    try {
+        const data = yield call(()=>fetchData(action.payload));
+        console.log(data)
+        yield put(getGistsSuccess(data));
+    } catch (e) {
+        yield put(getGistsFail(e))
+    }
 }
 
-export default mySaga;
+export default function* rootSaga () {
+    yield takeLatest(ADD_MESSAGE_WITH_SAGA, handleMessage);
+    yield takeEvery(GET_GISTS_REQUEST_SAGA, requestAPIData);
+
+}

@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import * as reducers from './reducers';
 import createSagaMiddleware from 'redux-saga';
-import mySaga from "./sagas";
+import rootSaga from "./sagas";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -10,7 +10,8 @@ const sagaMiddleware = createSagaMiddleware()
 const reducersState = combineReducers({
     profile: reducers.profileReducer,
     chats: reducers.chatsReducer,
-    messages: reducers.messagesReducer
+    messages: reducers.messagesReducer,
+    gists: reducers.gistsReducer
 })
 
 const persistConfig = {
@@ -28,4 +29,4 @@ export {persistor, store}
 
 export default store;
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
