@@ -9,9 +9,8 @@ export const getGistsRequestSaga = (api) => ({
     payload: api
 });
 
-export const getGistsRequest = (api) => ({
-    type: GET_GISTS_REQUEST,
-    payload: api
+export const getGistsRequest = () => ({
+    type: GET_GISTS_REQUEST
 });
 
 export const getGistsSuccess = (gists) => ({

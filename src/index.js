@@ -29,7 +29,9 @@ ReactDOM.render(
         <Provider store={store}>
             <PersistGate persistor={persistor} loading={null}>
                 <ThemeProvider theme={theme}>
-                    <App/>
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
                 </ThemeProvider>
             </PersistGate>
         </Provider>

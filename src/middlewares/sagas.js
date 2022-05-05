@@ -17,7 +17,7 @@ import {addChat, removeChat, trackDB, addMessage, changeName} from "./firebaseAc
 
 
 function* requestAPIData(action) {
-    yield put(getGistsRequest(action.payload));
+    yield put(getGistsRequest());
     try {
         const data = yield call(fetchData, action.payload);
         yield put(getGistsSuccess(data));
