@@ -25,6 +25,7 @@ const chatsReducer = (state = {
     switch (action.type) {
         case CHANGE_CHAT_LIST_FB: {
             return {
+                ...state,
                chatList: action.payload
             }
         }
