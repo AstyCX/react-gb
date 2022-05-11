@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {changeName} from "../../store/Duck/actions";
+import {changeNameFBSaga, updateDBSaga} from "../../store/Duck/actions";
 import {Button, TextField} from "@mui/material";
 import {useCallback, useRef, useState} from "react";
 import {Send} from "@mui/icons-material";
@@ -15,7 +15,8 @@ const Profile = () => {
     }
 
     const handleClick = useCallback(()=>{
-        dispatch(changeName(value))
+        dispatch(changeNameFBSaga(value))
+        dispatch(updateDBSaga());
         setValue('')
     }, [dispatch, value])
 

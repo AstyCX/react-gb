@@ -1,3 +1,8 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   background: aliceblue;
 }
@@ -84,3 +89,31 @@ body {
 .gistsDescription {
   margin: 0 0 15px 0;
 }
+
+.formRegistration, .formLogin {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 190px;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.errorFormRegistration, .errorFormLogin {
+  max-height: 230px;
+}
+
+.registration, .login {
+  width: 100%;
+}
+
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

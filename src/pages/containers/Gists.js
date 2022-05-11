@@ -13,30 +13,16 @@ const Gists = () => {
         dispatch(getGistsRequestSaga(API_URL_PUBLIC))
     }, [dispatch])
 
-    const render = () => {
-        switch (state.request) {
-            case 0:
-                return <>
-                    <Button onClick={handleClick}>Get Gists</Button>
-                </>;
-            case 1:
-                return <CircularProgress/>
-            case 2:
-                return <div className='gists'>
-                    {state.gists.map((el, i)=>(
-                        <Paper className='gistsDescription' key={i}>{el.description}</Paper>
-                    ))}
-                </div>
-            case 3:
-                console.error(state.error.description)
-                return <>
-                    <Button onClick={handleClick}>Try Again</Button>
-                </>
-        }
-    }
 
     return <>
-        {render()}
+        {!state.request && <Button onClick={handleClick}>Get Gists</Button>}
+        {!(state.request-1) && <div className='loading'><CircularProgress/></div> }
+        {!(state.request-2) && <div className='gists'>
+            {state.gists.map((el, i)=>(
+                <Paper className='gistsDescription' key={i}>{el.description}</Paper>
+            ))}
+        </div>}
+        {!(state.request-3) && <Button onClick={handleClick}>Try Again</Button>}
     </>
 }
 

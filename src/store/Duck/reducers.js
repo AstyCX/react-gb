@@ -1,11 +1,10 @@
 import {
-    ADD_CHAT,
-    DEL_CHAT,
-    ADD_CHAT_MESSAGES,
-    ADD_MESSAGE,
-    CHANGE_NAME,
-    DEL_CHAT_MESSAGES,
-    GET_GISTS_SUCCESS, GET_GISTS_REQUEST, GET_GISTS_FAIL
+    GET_GISTS_SUCCESS,
+    GET_GISTS_REQUEST,
+    GET_GISTS_FAIL,
+    CHANGE_CHAT_LIST_FB,
+    CHANGE_MESSAGE_LIST_FB,
+    CHANGE_NAME_FB
 } from "./actions";
 import {AUTHORS} from "../../constants/common";
 
@@ -14,8 +13,7 @@ import {AUTHORS} from "../../constants/common";
  *     chatList: [
  *         {
  *             id: string,
- *             icon: React.component,
- *             title: string
+ *             name: string
  *         }
  *     ]
  * }
@@ -25,32 +23,11 @@ const chatsReducer = (state = {
     chatList: []
 }, action) => {
     switch (action.type) {
-        case ADD_CHAT: {
-            const chatList = state.chatList || [];
-            const chatId = chatList.length ? +chatList.slice(-1)[0].id + 1 : 1;
-
+        case CHANGE_CHAT_LIST_FB: {
             return {
                 ...state,
-                chatList: [
-                    ...chatList,
-                    {
-                        id: chatId,
-                        title: action.payload
-                    }
-                ]
+               chatList: action.payload
             }
-        }
-        case DEL_CHAT: {
-            const a = {
-                ...state,
-                chatList: []
-            };
-            for (let i of state.chatList) {
-                if (i.id !== action.payload) {
-                    a.chatList = [...a.chatList, i];
-                }
-            }
-            return a;
         }
         default:
             return state;
@@ -75,47 +52,11 @@ const messagesReducer = (state = {
     messageList: {}
 }, action) => {
     switch (action.type) {
-        case ADD_MESSAGE: {
-            const {id, message} = action.payload;
-            const oldMessages = state.messageList[id] || [];
-
+        case CHANGE_MESSAGE_LIST_FB:
             return {
                 ...state,
-                messageList: {
-                    ...state.messageList,
-                    [id]: [
-                        ...oldMessages,
-                        {
-                            ...message,
-                            id: `${id}${oldMessages.length}`
-                        }
-                    ]
-                }
+                messageList: action.payload
             }
-        }
-        case ADD_CHAT_MESSAGES: {
-            const id = Object.keys(state.messageList).length ? +Object.keys(state.messageList).slice(-1)[0]+1 : 1;
-
-            return {
-                ...state,
-                messageList: {
-                    ...state.messageList,
-                    [id]: []
-                }
-            }
-        }
-        case DEL_CHAT_MESSAGES: {
-            const a = {
-                ...state,
-                messageList: {}
-            };
-            for (let i in state.messageList) {
-                if (i !== String(action.payload)) {
-                    a.messageList = {...a.messageList, [i]: state.messageList[i]};
-                }
-            }
-            return a;
-        }
         default:
             return state;
     }
@@ -123,7 +64,7 @@ const messagesReducer = (state = {
 
 /**
  * initialState = {
- *     checked: boolean
+ *     name: string
  * }
  */
 
@@ -131,7 +72,7 @@ const profileReducer = (state = {
     name: AUTHORS.me
 }, action) => {
     switch (action.type) {
-        case CHANGE_NAME:
+        case CHANGE_NAME_FB:
             return {
                 ...state,
                 name: action.payload
